@@ -1,4 +1,4 @@
-#### v0.3.5
+#### v0.3.6
 #### 
 
 FROM archlinux:latest
@@ -17,7 +17,7 @@ ADD makepkg /usr/bin/makepkg
 ### User
 
 RUN usermod -s /bin/bash -d /home/nobody nobody
-RUN echo "nobody ALL=(ALL) ALL:NOPASSWD" >> /etc/sudoers
+RUN echo "nobody ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 #
 CMD ["/bin/bash"]
