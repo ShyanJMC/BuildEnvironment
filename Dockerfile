@@ -13,10 +13,7 @@ ADD makepkg /usr/bin/makepkg
 
 ### User
 
-RUN usermod -s /bin/bash nobody
-RUN mkdir /home/nobody
-RUN chown -R nobody:nobody /home/nobody/
-RUN usermod -m -d /home/nobody/ nobody
+RUN usermod -s /bin/bash -d /home/nobody nobody
 
 #
 CMD ["/bin/bash"]
