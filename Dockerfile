@@ -9,9 +9,14 @@ RUN pacman -Syyuuq --noconfirm
 RUN pacman -Syyuuq base-devel curl rust git community/supervisor --noconfirm 
 RUN sed -i 's/march\=x86-64/march\=native -O2/g' /etc/makepkg.conf
 RUN sed -i '#RUSTFLAGS\=\"-C\ opt\-level\=2/RUSTFLAGS\=\"\-C\ opt\-level\=2\ \-C\ debuginfo\=0\ \-C\ target\-cpu\=native' /etc/makepkg.conf
-RUN usermod -s /bin/bash nobody
-
 ADD makepkg /usr/bin/makepkg
+
+### User
+
+RUN usermod -s /bin/bash nobody
+RUN mkdir /home/nobody
+RUN chown -R nobody:nobody /home/nobody/
+RUN usermod -m -d /home/nobody/ nobody
 
 #
 CMD ["/bin/bash"]
