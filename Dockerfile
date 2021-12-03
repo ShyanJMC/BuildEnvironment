@@ -1,4 +1,4 @@
-#### v0.3.6
+#### v0.5.7
 #### 
 
 FROM archlinux:latest
@@ -10,9 +10,9 @@ RUN pacman -Syyuuq --noconfirm
 
 ### BuildSystem
 RUN pacman -Syyuuq base-devel curl rust git --needed --noconfirm 
-RUN sed -i 's/march\=x86-64/march\=native -O2/g' /etc/makepkg.conf
 RUN sed -i '#RUSTFLAGS\=\"-C\ opt\-level\=2/RUSTFLAGS\=\"\-C\ opt\-level\=2\ \-C\ debuginfo\=0\ \-C\ target\-cpu\=native' /etc/makepkg.conf
 ADD makepkg /usr/bin/makepkg
+ADD build.sh /usr/bin/build
 
 ### User
 
@@ -20,4 +20,4 @@ RUN usermod -s /bin/bash -d /home/nobody nobody
 RUN echo "nobody ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 #
-CMD ["/bin/bash"]
+CMD ["/bin/su","nobody","-"]
