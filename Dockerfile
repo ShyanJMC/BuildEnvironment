@@ -13,6 +13,7 @@ RUN pacman -Syyuuq base-devel curl rust git go nss nspr protobuf openssl-1.0 --n
 RUN sed -i '#RUSTFLAGS\=\"-C\ opt\-level\=2/RUSTFLAGS\=\"\-C\ opt\-level\=2\ \-C\ debuginfo\=0\ \-C\ target\-cpu\=native' /etc/makepkg.conf
 ADD makepkg /usr/bin/makepkg
 ADD build.sh /usr/bin/build
+RUN pacman-key --init && pacman-key --populate && pacman-key --refresh-keys
 
 ### User
 
